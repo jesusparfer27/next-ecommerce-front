@@ -3,11 +3,11 @@ import Featured from "@/components/Featured";
 import { Product } from "@/models/Product";
 import { mongooseConnect } from "@/lib/mongoose";
 
-export default function Home() {
+export default function Home({product}) {
   return (
     <div>
       <Header />
-      <Featured />
+      <Featured product={product} />
     </div>
   );
 }
