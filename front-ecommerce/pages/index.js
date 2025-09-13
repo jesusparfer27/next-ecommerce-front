@@ -8,7 +8,7 @@ export default function Home({product, newProducts}) {
   return (
     <div>
       <Header />
-      <Featured product={product} />
+      <Featured product={product} /> 
       <NewProducts newProducts={newProducts} />
     </div>
   );
