@@ -4,7 +4,7 @@ import { Product } from "@/models/Product";
 import { mongooseConnect } from "@/lib/mongoose";
 import NewProducts from "@/components/NewProduct";
 
-export default function Home({product, newProducts}) {
+export default function Home({product, newProducts}) { 
   return (
     <div>
       <Header />
