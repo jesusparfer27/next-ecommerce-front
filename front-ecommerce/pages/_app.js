@@ -1,3 +1,5 @@
+import { CartContextProvider } from "@/components/CartContext";
+
 const globalStyles = `
 @import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Funnel+Display:wght@300..800&family=Roboto:ital,wght@0,100..900;1,100..900&family=Saira+Stencil+One&display=swap');
   body {
@@ -20,7 +22,9 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <GlobalStyle />
-      <Component {...pageProps} />
+      <CartContextProvider>
+        <Component {...pageProps} />
+      </CartContextProvider>
     </>
   );
 }
