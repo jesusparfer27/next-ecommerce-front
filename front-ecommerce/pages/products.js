@@ -4,8 +4,18 @@ import ProductsGrid from "@/components/ProductsGrid";
 import { mongooseConnect } from "@/lib/mongoose";
 import { Product } from "@/models/Product";
 import styled from "styled-components";
-import Title from "@/components/Title";
+// import Title from "@/components/Title";
 
+
+const Title = styled.h1`
+  font-size: 1.8rem;
+  font-weight: 400;
+
+  @media screen and (min-width: 768px) {
+  font-size: 2rem;
+  font-weight: 400;
+}
+`
 
 const ColWrapper = styled.div`
   display: grid;

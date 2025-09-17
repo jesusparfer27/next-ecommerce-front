@@ -11,7 +11,6 @@ const StyledHeader = styled.header`
 const Logo = styled(Link)`
   color:#fff;
   text-decoration:none;
-  position: absolute;
   z-index: 99;
  @media-screen and (min-width: 768px;) {
   position: relative;
@@ -43,7 +42,8 @@ const StyledNav = styled.nav`
     display: flex;
     position: static;
     padding: 0;
-  }
+    right: 0;  
+    }
 `;
 const NavLink = styled(Link)`
   display: block;
