@@ -1,7 +1,12 @@
 import styled from "styled-components";
 import Center from "./Center";
 import ProductsGrid from "./ProductsGrid";
-import Title from "./Title";
+// import Title from "./Title";
+
+const Title = styled.h1`
+color: #000;
+font-weight: 500;
+`
 
 
 

@@ -1,72 +1,106 @@
 import Link from "next/link";
 import styled from "styled-components";
-import Center from "./Center";
-import { useContext } from "react";
-import { CartContext } from "./CartContext";
+import Center from "@/components/Center";
+import { useContext, useState, useEffect } from "react";
+import { CartContext } from "@/components/CartContext";
+import BarsIcon from "@/components/icons/Bars";
 
 const StyledHeader = styled.header`
   background-color: #222;
-  padding: 10px 20px;
 `;
-
 const Logo = styled(Link)`
-  color: #fff;
-  text-decoration: none;
-  font-size: 24px;
-  font-weight: bold;
-`;
+  color:#fff;
+  text-decoration:none;
+  position: absolute;
+  z-index: 99;
+ @media-screen and (min-width: 768px;) {
+  position: relative;
+  text-decoration:none;
+ }
 
+`;
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 20px 0;
 `;
-
-const NavLink = styled(Link)`
-  color: #aaa;
-  text-decoration: none;
-  margin-left: 20px;
-`;
-
 const StyledNav = styled.nav`
-  ul {
-    display: flex;
-    items-align: center;
-    margin: 0;
-    height: 100%;
-    list-style: none;
-    padding: 0;
+  ${props => props.mobileNavActive ? `
+    display: block;
+  ` : `
+    display: none;
+  `}
   gap: 15px;
-  }
-
-  li {
-    margin: 0;
-    padding: 0;
-    height: 100%;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 70px 20px 20px;
+  background-color: #222;
+  z-index: 10;
+  @media screen and (min-width: 768px) {
     display: flex;
-    align-items: center;
+    position: static;
+    padding: 0;
+  }
+`;
+const NavLink = styled(Link)`
+  display: block;
+  color:#aaa;
+  text-decoration:none;
+  padding: 10px 0;
+  @media screen and (min-width: 768px) {
+    padding:0;
+  }
+`;
+const NavButton = styled.button`
+  background-color: transparent;
+  width: 30px;
+  height: 30px;
+  margin-right: 1rem;
+  padding-bottom: 1rem;
+  border:0;
+  color: white;
+  right: 0;
+  cursor: pointer;
+  position: absolute;
+  z-index: 10;
+  @media screen and (min-width: 768px) {
+    display: none;
   }
 `;
 
 export default function Header() {
-    const { cartProducts } = useContext(CartContext);
-    return (
-        <StyledHeader>
-            <Center>
-                <Wrapper>
-                    <Logo href="/">E-commerce</Logo>
-                    <StyledNav>
-                        <ul>
-                            <li><NavLink href="/">Home</NavLink></li>
-                            <li><NavLink href="/products">Products</NavLink></li>
-                            <li><NavLink href="/categories">Categories</NavLink></li>
-                            <li><NavLink href="/account">Account</NavLink></li>
-                            <li><NavLink href="/cart">Cart {cartProducts.length > 0 && `(${cartProducts.length})`}</NavLink></li>
+  const { cartProducts } = useContext(CartContext);
+  const [mobileNavActive, setMobileNavActive] = useState(false);
 
-                        </ul>
-                    </StyledNav>
-                </Wrapper>
-            </Center>
-        </StyledHeader>
-    );
+    // 👉 Bloquear/desbloquear scroll
+  useEffect(() => {
+    if (mobileNavActive) {
+      document.body.style.overflow = "hidden"; // bloquea scroll
+    } else {
+      document.body.style.overflow = ""; // lo restablece
+    }
+  }, [mobileNavActive]);
+
+  return (
+    <StyledHeader>
+      <Center>
+        <Wrapper>
+          <Logo href={'/'}>Ecommerce</Logo>
+          <StyledNav mobileNavActive={mobileNavActive}>
+            <NavLink href={'/'}>Home</NavLink>
+            <NavLink href={'/products'}>All products</NavLink>
+            <NavLink href={'/categories'}>Categories</NavLink>
+            <NavLink href={'/account'}>Account</NavLink>
+            <NavLink href={'/cart'}>Cart ({cartProducts.length})</NavLink>
+          </StyledNav>
+          <NavButton onClick={() => setMobileNavActive(prev => !prev)}>
+            <BarsIcon />
+          </NavButton>
+        </Wrapper>
+      </Center>
+    </StyledHeader>
+  );
 }

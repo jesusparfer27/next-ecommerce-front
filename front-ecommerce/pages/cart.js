@@ -22,6 +22,9 @@ const Box = styled.div`
   background-color: #fff;
   border-radius: 10px;
   padding: 30px;
+    &:nth-child(2) {
+    margin-bottom: 30px; /* 👈 aquí ajustas el espacio */
+  }
 `;
 
 const ProductInfoCell = styled.td`
